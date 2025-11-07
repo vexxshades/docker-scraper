@@ -65,6 +65,8 @@ def listen_for_container_events():
                 logger.info(f"Detected new container creation: {container_id[:12]}")
                 container = client.containers.get(container_id)
                 metadata = get_container_metadata(container)
+                if metadata:
+                    print(json.dumps(metadata), flush=True)
                     
             except docker.errors.NotFound:
                 logger.warning(f"Container {container_id[:12]} not found (may have been removed)")
