@@ -43,16 +43,6 @@ def get_container_metadata(container):
         return None
 
 
-def append_to_json_file(metadata, filepath):
-    try:
-        # Print to stdout for journald
-        print(json.dumps(metadata), flush=True)
-        
-        logger.info(f"Logged metadata for container: {metadata.get('container_name')}")
-    except Exception as e:
-        logger.error(f"Error writing to file: {e}")
-
-
 def listen_for_container_events():
     try:
         client = docker.from_env()
