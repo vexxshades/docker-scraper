@@ -18,7 +18,7 @@ systemctl enable docker-scraper.service
 echo "Docker Scraper installed successfully!"
 echo "To start the service, run: systemctl start docker-scraper"
 echo "To check status, run: systemctl status docker-scraper"
-echo "Logs will be written to: /opt/docker-scraper/container_events.json"
+echo "View logs by running: journalctl -u docker-scraper -f"
 
 exit 0
 ls -la /opt/docker-scraper/
