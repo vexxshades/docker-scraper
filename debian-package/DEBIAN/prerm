@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+# Stop and disable service if it's running
+if systemctl is-active --quiet docker-scraper.service; then
+    systemctl stop docker-scraper.service
+fi
+
+if systemctl is-enabled --quiet docker-scraper.service; then
+    systemctl disable docker-scraper.service
+fi
+
+systemctl daemon-reload
+
+echo "Docker Scraper service stopped and disabled"
+
+exit 0

@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+# Create virtual environment and install dependencies
+cd /opt/docker-scraper
+python3 -m venv venv
+/opt/docker-scraper/venv/bin/pip install --upgrade pip
+/opt/docker-scraper/venv/bin/pip install -r requirements.txt
+
+# Set proper permissions
+chown -R root:root /opt/docker-scraper
+chmod 755 /opt/docker-scraper/main.py
+
+# Reload systemd and enable service
+systemctl daemon-reload
+systemctl enable docker-scraper.service
+
+echo "Docker Scraper installed successfully!"
+echo "To start the service, run: systemctl start docker-scraper"
+echo "To check status, run: systemctl status docker-scraper"
+echo "Logs will be written to: /opt/docker-scraper/container_events.json"
+
+exit 0
+ls -la /opt/docker-scraper/
+sudo systemctl status docker-scraper

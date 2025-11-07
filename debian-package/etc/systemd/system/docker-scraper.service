@@ -1,0 +1,21 @@
+[Unit]
+Description=Docker Event Scraper - Monitors container creation events
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/docker-scraper
+ExecStart=/opt/docker-scraper/venv/bin/python /opt/docker-scraper/main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
